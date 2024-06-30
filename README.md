@@ -1,3 +1,69 @@
+# HttpClientUtils Documentation
+
+This document provides a comprehensive guide to the methods available in the `HttpClientUtils` class, including examples of how to use them in Karate tests.
+
+## Table of Contents
+1. [Cookie and Session Handling](#cookie-and-session-handling)
+2. [Variable Handling in Different Scopes](#variable-handling-in-different-scopes)
+5. [Helper Methods](#helper-methods)
+
+## Cookie and Session Handling
+
+### Setting a Cookie
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* HttpClientUtils.setCookie('example.com', 'session_id', '12345', '/')
+```
+
+### Getting a Cookie
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* def sessionId = HttpClientUtils.getCookie('example.com', 'session_id')
+* print 'Session ID:', sessionId
+```
+
+### Clearing Cookies for a Domain
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* HttpClientUtils.clearCookies('example.com')
+```
+
+### Applying Stored Cookies to a Request
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* def request = httpClient.url(baseUrl + '/api/user-info')
+* def requestWithCookies = HttpClientUtils.applyCookies(request, 'example.com')
+* def response = requestWithCookies.method('GET').invoke()
+```
+
+### Extracting and Storing Cookies from a Response
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* def response = httpClient.url(baseUrl + '/api/login').method('POST').invoke()
+* HttpClientUtils.extractAndStoreCookies('example.com', response)
+```
+
+## Variable Handling in Different Scopes
+
+### Setting a Global Variable
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* HttpClientUtils.setGlobalVariable('testScope', 'userId', '12345')
+```
+
+### Getting a Global Variable
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* def userId = HttpClientUtils.getGlobalVariable('testScope', 'userId')
+* print 'User ID:', userId
+```
+
+### Clearing Global Variables for a Scope
+```gherkin
+* def HttpClientUtils = Java.type('com.karateext.http.HttpClientUtils')
+* HttpClientUtils.clearGlobalVariables('testScope')
+```
+
 # FileUtils Documentation
 
 This document provides a comprehensive guide to the methods available in the `FileUtils` class, including examples of how to use them in Karate tests.
