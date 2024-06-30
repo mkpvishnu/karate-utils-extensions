@@ -1,3 +1,284 @@
+# FileUtils Documentation
+
+This document provides a comprehensive guide to the methods available in the `FileUtils` class, including examples of how to use them in Karate tests.
+
+## Table of Contents
+1. [CSV Operations](#csv-operations)
+2. [Excel Operations](#excel-operations)
+3. [Generic File Operations](#generic-file-operations)
+4. [File Searching](#file-searching)
+5. [File Compression and Decompression](#file-compression-and-decompression)
+6. [CSV to Excel and Reverse](#csv-to-excel-and-reverse)
+7. [File Splitting](#file-splitting)
+8. [File Generation](#file-generation)
+9. [Additional Utility Methods](#additional-utility-methods)
+
+## CSV Operations
+
+### readCsv(String filePath)
+Reads a CSV file and returns its content as a List of Maps.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def csvData = FileUtils.readCsv('path/to/your/file.csv')
+* print 'CSV Data:', csvData
+```
+
+### writeCsv(String filePath, List<Map<String, String>> data)
+Writes data to a CSV file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def data = [{name: 'John', age: '30'}, {name: 'Alice', age: '25'}]
+* FileUtils.writeCsv('path/to/output.csv', data)
+```
+
+## Excel Operations
+
+### readExcel(String filePath)
+Reads an Excel file and returns its content as a List of Maps.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def excelData = FileUtils.readExcel('path/to/your/file.xlsx')
+* print 'Excel Data:', excelData
+```
+
+### writeExcel(String filePath, List<Map<String, String>> data)
+Writes data to an Excel file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def data = [{name: 'John', age: '30'}, {name: 'Alice', age: '25'}]
+* FileUtils.writeExcel('path/to/output.xlsx', data)
+```
+
+## Generic File Operations
+
+### readFile(String filePath)
+Reads the content of a file as a string.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def fileContent = FileUtils.readFile('path/to/your/file.txt')
+* print 'File Content:', fileContent
+```
+
+### writeFile(String filePath, String content)
+Writes a string to a file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def content = 'Hello, World!'
+* FileUtils.writeFile('path/to/output.txt', content)
+```
+
+## File Searching
+
+### searchFilesByExtension(String directory, String extension)
+Searches for files with a specific extension in a directory and its subdirectories.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def pdfFiles = FileUtils.searchFilesByExtension('/path/to/directory', 'pdf')
+* print 'PDF Files:', pdfFiles
+```
+
+## File Compression and Decompression
+
+### compressFile(String sourceFile, String zipFile)
+Compresses a file into a ZIP archive.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.compressFile('path/to/source.txt', 'path/to/archive.zip')
+```
+
+### decompressFile(String zipFile, String destDirectory)
+Decompresses a ZIP archive into a destination directory.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.decompressFile('path/to/archive.zip', 'path/to/extract')
+```
+
+## CSV to Excel and Reverse
+
+### csvToExcel(String csvFile, String excelFile)
+Converts a CSV file to an Excel file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.csvToExcel('path/to/source.csv', 'path/to/output.xlsx')
+```
+
+### excelToCsv(String excelFile, String csvFile)
+Converts an Excel file to a CSV file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.excelToCsv('path/to/source.xlsx', 'path/to/output.csv')
+```
+
+## File Splitting
+
+### splitFile(String sourceFile, String destDirectory, int parts)
+Splits a file into multiple parts.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.splitFile('path/to/largefile.dat', 'path/to/output', 5)
+```
+
+## File Generation
+
+### generateFile(String filePath, long sizeInBytes)
+Generates a file of a specified size.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.generateFile('path/to/newfile.dat', 1024 * 1024) // 1MB file
+```
+
+## Additional Utility Methods
+
+### createDirectory(String path)
+Creates a new directory.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def created = FileUtils.createDirectory('path/to/new/directory')
+* print 'Directory created:', created
+```
+
+### getFileSize(String filePath)
+Gets the size of a file in bytes.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def fileSize = FileUtils.getFileSize('path/to/your/file.txt')
+* print 'File size:', fileSize
+```
+
+### getFileExtension(String filePath)
+Gets the extension of a file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def extension = FileUtils.getFileExtension('path/to/your/file.txt')
+* print 'File extension:', extension
+```
+
+### isFileEmpty(String filePath)
+Checks if a file is empty.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def isEmpty = FileUtils.isFileEmpty('path/to/your/file.txt')
+* print 'Is file empty:', isEmpty
+```
+
+### copyFile(String sourcePath, String destPath)
+Copies a file from one location to another.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.copyFile('path/to/source.txt', 'path/to/destination.txt')
+```
+
+### moveFile(String sourcePath, String destPath)
+Moves a file from one location to another.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.moveFile('path/to/source.txt', 'path/to/new/location.txt')
+```
+
+### deleteFile(String filePath)
+Deletes a file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* FileUtils.deleteFile('path/to/unwanted.txt')
+```
+
+### listFiles(String directory)
+Lists all files in a directory.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def files = FileUtils.listFiles('path/to/directory')
+* print 'Files in directory:', files
+```
+
+### getMd5Checksum(String filePath)
+Calculates the MD5 checksum of a file.
+
+Karate Example:
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* def md5 = FileUtils.getMd5Checksum('path/to/your/file.txt')
+* print 'MD5 Checksum:', md5
+```
+
+## Best Practices for Using FileUtils in Karate
+
+1. **Error Handling**: Always wrap FileUtils calls in a `try-catch` block to handle potential IOExceptions:
+
+```gherkin
+* def FileUtils = Java.type('com.karateext.file.FileUtils')
+* try
+  * def csvData = FileUtils.readCsv('path/to/your/file.csv')
+* catch e
+  * print 'Error reading CSV:', e
+```
+
+2. **Path Management**: Use `karate.properties['user.dir']` to get the project root directory for constructing file paths:
+
+```gherkin
+* def projectRoot = karate.properties['user.dir']
+* def filePath = projectRoot + '/src/test/resources/testdata.csv'
+* def csvData = FileUtils.readCsv(filePath)
+```
+
+3. **Data Verification**: After reading or writing files, always verify the data:
+
+```gherkin
+* def csvData = FileUtils.readCsv('path/to/your/file.csv')
+* match csvData[0] contains { name: '#string', age: '#number' }
+```
+
+4. **Cleanup**: In your teardown steps, make sure to delete any temporary files created during the test:
+
+```gherkin
+* def tempFile = 'path/to/temp.txt'
+* FileUtils.writeFile(tempFile, 'Test Data')
+# ... perform your test ...
+* FileUtils.deleteFile(tempFile)
+```
+
+By following these best practices and utilizing the FileUtils methods, you can effectively manage file operations in your Karate tests, making them more robust and maintainable.
 # StringUtils Documentation
 
 This document provides a comprehensive guide to the methods available in the `StringUtils` class, including both existing and newly added methods. Each method is explained with examples of its usage in testing scenarios.
